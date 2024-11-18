@@ -83,6 +83,14 @@ var $j = jQuery.noConflict();
 <button id="downloadCSV" >Download Test (CSV)</button>
 Search: <input id="filter" class="table-filter" type="text" placeholder="Test/Class/Package" onkeyup="searchTests()"/>
 
+<div>
+    Passed <input type="checkbox" id="filter-passed" class="table-filter" value="PASSED" onchange="filterTests()"/>
+    Failed <input type="checkbox" id="filter-failed" class="table-filter" value="FAILED" onchange="filterTests()"/> 
+    Skipped <input type="checkbox" id="filter-skipped" class="table-filter" value="SKIPPED" onchange="filterTests()"/>
+</div>
+
+
+
 <div class="extrabuttons">
 	<button id="expandall">Expand All</button>
 	<button id="collapseall">Collapse All</button>

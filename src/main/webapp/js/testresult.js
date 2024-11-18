@@ -40,7 +40,39 @@ function applyFilter(rows, filter) {
     });
 }
 
-function searchTests(){
+function applyResultFilter(rows, filters) {
+    $j(rows).each(function () {
+        var cells = $j(this).find(".table-cell");
+        var rowMatches = false;
+        cells.each(function () {
+            var cellText = $j(this).text().toUpperCase();
+            if (filters.some(filter => cellText.includes(filter))) {
+                rowMatches = true;
+                return false;
+            }
+        });
+        if (rowMatches) {
+            $j(this).show();
+        } else {
+            $j(this).hide();
+        }
+    });
+}
+
+function filterTests() {
+    var rows = $j(".test-history-table .table-row");
+    var filters = [];
+    if ($j("#filter-failed").is(":checked")) filters.push("FAILED");
+    if ($j("#filter-skipped").is(":checked")) filters.push("SKIPPED");
+    if ($j("#filter-passed").is(":checked")) filters.push("PASSED");
+    if (filters.length === 0) {
+        clearedFilter(rows);
+    } else {
+        applyResultFilter(rows, filters);
+    }
+}
+
+function searchTests() {
     var rows = $j(".test-history-table .table-row");
     var filter = $j("#filter").val().toLowerCase();
     if (filter == "") {
